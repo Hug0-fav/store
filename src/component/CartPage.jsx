@@ -33,48 +33,87 @@ const CartItemBox = styled.div`
     object-fit: contain;
     border-radius: 8px;
     background-color: white;
+    flex-shrink: 0;
   }
 
-  h3 {
-    font-size: 1.1rem;
-    color: var(--primary-color-02);
-    margin-bottom: 0.3rem;
-  }
+  .details {
+    flex: 1;
+    min-width: 150px;
 
-  p {
-    color: var(--primary-color-01);
-    margin-bottom: 0.5rem;
-  }
+    h3 {
+      font-size: 1.1rem;
+      color: var(--primary-color-02);
+      margin-bottom: 0.3rem;
+    }
 
-  button {
-    background-color: var(--primary-color-01);
-    color: white;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    margin: 0 0.3rem;
-    transition: background 0.2s;
+    p {
+      color: var(--primary-color-01);
+      margin-bottom: 0.5rem;
+    }
 
-    &:hover {
-      background-color: var(--primary-color-02);
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      button {
+        background-color: var(--primary-color-01);
+        color: white;
+        border: none;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: background 0.2s;
+
+        &:hover {
+          background-color: var(--primary-color-02);
+        }
+      }
+
+      span {
+        min-width: 20px;
+        text-align: center;
+        display: inline-block;
+        font-weight: bold;
+        color: var(--primary-color-02);
+      }
     }
   }
 
-  span {
-    min-width: 20px;
-    text-align: center;
-    display: inline-block;
-    font-weight: bold;
-    color: var(--primary-color-02);
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    button {
+      background-color: var(--primary-color-01);
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+
+      &:hover {
+        background-color: var(--primary-color-02);
+      }
+    }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
-    img {
-      margin-bottom: 0.5rem;
+
+    .actions {
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .quantity-controls {
+      gap: 0.5rem;
     }
   }
 `;
@@ -116,19 +155,20 @@ function CartPage() {
       {cartItems.map((item, i) => (
         <CartItemBox key={i}>
           <img src={item.image} alt={item.title} />
-          <div>
+
+          <div className="details">
             <h3>{item.title}</h3>
             <p>${item.price}</p>
-            <div>
+            <div className="quantity-controls">
               <button onClick={() => decrementQuantity(item.id)}>-</button>
               <span>{item.quantity}</span>
               <button onClick={() => incrementQuantity(item.id)}>+</button>
             </div>
           </div>
 
-          <div>
+          <div className="actions">
             <button onClick={() => handleDelete(item.id)}>Delete</button>
-            <button>Buy now</button>
+            <CheckoutButton singleItem={item} />
           </div>
         </CartItemBox>
       ))}

@@ -2,17 +2,22 @@ import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
   "pk_test_51PmbES2MYjUmdaU83UBgvlAy5inCKuWqDbxF4qnsb9BNwepIzNMhHJ8gfBXPVa1GMcucHSSRs9L24TbY3UHfVohE00olhxrOhJ"
-); // Replace with your real publishable key
+);
 
-export default function CheckoutButton({ cartItems }) {
+export default function CheckoutButton({ cartItems, singleItem }) {
   const handleCheckout = async () => {
-    const stripe = await stripePromise; // ✅ Now we're using it!
+    const stripe = await stripePromise;
 
-    const res = await fetch("http://localhost:4242/create-checkout-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cartItems }),
-    });
+    const itemsToBuy = singleItem ? [singleItem] : cartItems;
+
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/create-checkout-session`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cartItems: itemsToBuy }),
+      }
+    );
 
     const data = await res.json();
 
@@ -30,5 +35,6 @@ export default function CheckoutButton({ cartItems }) {
     }
   };
 
-  return <button onClick={handleCheckout}>Checkout</button>;
+  return <button onClick={handleCheckout}>{singleItem ? "Buy Now" : "Checkout"}</button>;
 }
+

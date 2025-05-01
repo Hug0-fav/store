@@ -13,7 +13,7 @@ const CategoryList = styled.ul`
   width: 200px;
 `;
 
-function Categories({onSelectCategory}) {
+function Categories({ onSelectCategory }) {
   const [catergories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 

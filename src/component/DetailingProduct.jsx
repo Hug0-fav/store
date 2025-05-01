@@ -9,33 +9,111 @@ const Wrapper = styled.div`
   margin: 2rem auto;
   display: flex;
   gap: 2rem;
+  background-color: var(--secondary-color-06);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.8rem;
+  }
 `;
 
 const Image = styled.img`
   width: 300px;
   object-fit: contain;
+  border-radius: 8px;
+  background-color: var(--secondary-color-07);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-height: 250px;
+  }
+
+  @media (max-width: 480px) {
+    max-height: 200px;
+  }
 `;
 
 const Info = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
 
-const Title = styled.h2``;
+const Title = styled.h2`
+  font-size: 1.5rem;
+  color: var(--primary-color-02);
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.1rem;
+  }
+`;
+
 const Price = styled.p`
   font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--primary-color-03);
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
+
 const Description = styled.p`
   margin: 1rem 0;
+  font-size: 1rem;
+  color: var(--primary-color-01);
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const AddToCartButton = styled.button`
   padding: 0.5rem 1rem;
-  background: black;
-  color: white;
+  background: var(--primary-color-02);
+  color: var(--secondary-color-06);
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background 0.3s;
+
+  &:hover {
+    background: var(--primary-color-03);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
 `;
 
 function DetailingProduct() {

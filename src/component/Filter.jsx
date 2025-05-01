@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { fetchAllProducts } from "../data/allProduct";
 import styled from "styled-components";
+import { useCart } from "./CartContext";
 
 // Styled components
 const Wrapper = styled.div`
@@ -45,11 +46,38 @@ const Card = styled.div`
   }
 `;
 
+const ViewButton = styled(Link)`
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 0.5rem;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+const Cart = styled.button`
+  display: flex;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  align-items: flex-end;
+`;
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 function SearchResults() {
+  const { addToCart } = useCart();
   const [results, setResults] = useState([]);
   const query = useQuery().get("q");
 
@@ -78,6 +106,8 @@ function SearchResults() {
               <img src={item.image} alt={item.title} />
               <h4>{item.title}</h4>
               <p>₦{item.price}</p>
+              <ViewButton to={`/product/${item.id}`}>View Details</ViewButton>
+              <Cart onClick={() => addToCart(item)}>Add cart</Cart>
             </Card>
           ))}
         </Grid>

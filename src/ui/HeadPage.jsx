@@ -72,7 +72,7 @@ const Button = styled.button`
   }
 `;
 
-function HeadPage() {
+function HeadPage({ onButtonClick }) {
   return (
     <StyledHeadPage>
       <HeadContent>
@@ -82,15 +82,7 @@ function HeadPage() {
           premium quality, and deals you won’t want to miss.
         </Text>
         <CTA>
-          <Button>Shop Now</Button>
-          <Button
-            style={{
-              backgroundColor: "var(--secondary-color-01)",
-              color: "var(--primary-color-02)",
-            }}
-          >
-            Learn More
-          </Button>
+          <Button onClick={onButtonClick}>Shop Now</Button>
         </CTA>
       </HeadContent>
     </StyledHeadPage>

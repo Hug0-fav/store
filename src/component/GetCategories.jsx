@@ -1,6 +1,8 @@
 import { getProductByCategories } from "../data/allProduct";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useCart } from "./CartContext";
+import { Link } from "react-router-dom";
 
 const Item = styled.div`
   display: flex;
@@ -25,7 +27,34 @@ const CategoryItem = styled.div`
   }
 `;
 
+const ViewButton = styled(Link)`
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 0.5rem;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+const Cart = styled.button`
+  /* display: flex; */
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  /* align-items: flex-end; */
+`;
+
 function GetCategories({ category }) {
+  const { addToCart } = useCart();
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
@@ -46,6 +75,8 @@ function GetCategories({ category }) {
           <img src={p.image} alt={p.title} />
           <h4>{p.title}</h4>
           <p>₦{p.price}</p>
+          <ViewButton to={`/product/${p.id}`}>View Details</ViewButton>
+          <Cart onClick={() => addToCart(p)}>Add cart</Cart>
         </CategoryItem>
       ))}
     </Item>

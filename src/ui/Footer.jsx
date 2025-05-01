@@ -122,7 +122,7 @@ function Footer() {
             <Link to="/login">Sign in</Link>
           </Li>
           <Li>
-            <Link to="/signin">Register</Link>
+            <Link to="/signup">Register</Link>
           </Li>
         </FooterSection>
 
@@ -135,9 +135,15 @@ function Footer() {
 
         <FooterSection>
           <Head>Shop</Head>
-          <Li>All Products</Li>
-          <Li>Cart</Li>
-          <Li>History</Li>
+          <Li>
+            <Link to="/products">All Product</Link>
+          </Li>
+          <Li>
+            <Link to="/cart">Cart</Link>
+          </Li>
+          <Li>
+            <Link to="/history">History</Link>
+          </Li>
         </FooterSection>
 
         <FooterSection>
