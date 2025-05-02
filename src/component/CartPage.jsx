@@ -173,7 +173,7 @@ function CartPage() {
         </CartItemBox>
       ))}
 
-      <PriceList>Total: ${totalPrice}</PriceList>
+      <PriceList>Total: ${Math.round(totalPrice)}</PriceList>
 
       <div style={{ textAlign: "right", marginTop: "1rem" }}>
         <CheckoutButton cartItems={cartItems} />
